@@ -20,12 +20,12 @@ Enemy.prototype.update = function(dt) {
 		this.x += this.speed * dt;
 		// Reset the enemy position if it has crossed the screen
 	} else {
-		this.x = -10;
+		this.x = -120;
 	}
 	
-	// Reset the game when the player comes within 25px of an enemy bug
-	if(player.x <= this.x + 25 && player.x >= this.x - 25) {
-		if(player.y <= this.y + 25 && player.y >= this.y - 25) {
+	// Reset the game when the player comes within 55px of an enemy bug
+	if(player.x <= this.x + 55 && player.x >= this.x - 55) {
+		if(player.y <= this.y + 55 && player.y >= this.y - 55) {
 			player.reset();
 		}
 	}
@@ -52,7 +52,7 @@ Player.prototype.update = function() {
 		this.x = this.x + 101;
 	} else if(this.ctlKey === 'up') {
 		this.y = this.y - 85;
-	} else if(this.ctlKey === 'down' && this.y != 365) {
+	} else if(this.ctlKey === 'down' && this.y < 365) {
 		this.y = this.y + 85;
 	}
 	this.ctlKey = null;
@@ -64,9 +64,9 @@ Player.prototype.update = function() {
 
 // Define the inital position of the player on the canvas and on reset
 Player.prototype.reset = function() {
-	player.x = 200;
-	player.y = 400;
-}
+	this.x = 200;
+	this.y = 400;
+};
 // Draw the Player on the screen, required method for game
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
